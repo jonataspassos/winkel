@@ -1,6 +1,9 @@
 #ifndef SERIAL_PRINTER_H
 #define SERIAL_PRINTER_H
 #include <avr/io.h>
+#include <stdio.h>
+//#include <stdlib.h>
+//#include <stdarg.h>
     void USART_CONFIG();
     void USART_TRANSFER(uint8_t ender);
     void USART_TRANSFER_STRING(char * text);
@@ -28,6 +31,16 @@ void USART_TRANSFER_STRING(char * text){
 	//USART_TRANSFER(10);
 	//USART_TRANSFER(13);
 }
+
+/*uint8_t USART_printf(const char * _format,...){
+	va_list arg;
+	int n;
+	char c[30];
+	va_start(arg,_format);
+	n = sprintf(c,_format,arg);
+	USART_TRANSFER_STRING(c);
+	return n;
+}*/
 
 void USART_TRANSFER_INT(long int val){
 	char text[20];
@@ -80,10 +93,15 @@ int pot(int x, int y){
 	return z;
 }
 
-void USART_TRANSFER_FLOAT(float val,int precision){
+void USART_TRANSFER_FLOAT(float val){
 	char text[20];
-	int temp = (int)((val - (int)val)*pot(10,precision));
-	
+	/*int temp = (int)((val - (int)val)*pot(10,precision));
+	USART_TRANSFER_INT((int)((val - (int)val)));
+	USART_TRANSFER_STRING("\r\n");
+	USART_TRANSFER_INT(temp);
+	USART_TRANSFER_STRING("\r\n");
+	USART_TRANSFER_INT(pot(10,precision));
+	USART_TRANSFER_STRING("\r\n");
 	text[18-precision]='.';
 	int i = 18;
 	do{
@@ -98,7 +116,8 @@ void USART_TRANSFER_FLOAT(float val,int precision){
 		temp/=10;
 		i--;
 	}while(temp  && (i>=2));
-	text[19] = 0;
-	USART_TRANSFER_STRING(text+i+1);
+	text[19] = 0;*/
+	sprintf(text,"%05.3f",val);
+	USART_TRANSFER_STRING(text);//+i+1
 }
 #endif
