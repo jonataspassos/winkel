@@ -5,7 +5,7 @@
 		#define F_CPU 16000000UL
 	#endif
 	#include <util/delay.h>
-	#include <repository/i2c.h>
+	#include "i2c.h"
 	
 	#define MPU6050_ADDRESS   0xD0
 	#define MPU6050_RA_XG_OFFS_TC       0x00

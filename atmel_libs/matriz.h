@@ -2,7 +2,7 @@
 #define MATRIZ_H
 #include <avr/io.h>
 #include <stdlib.h>
-#include "../../atmel_libs/usart.h"
+#include "usart.h"
 #include <stdio.h>
 
 #define LINHA 4
