@@ -2,7 +2,7 @@
 #define MATRIZ_H
 #include <avr/io.h>
 #include <stdlib.h>
-#include "../../atmel_libs/usart.h"
+#include "usart.h"
 #include <stdio.h>
 
 #define LINHA 4
@@ -21,10 +21,19 @@ typedef struct tp_matriz{
 Matriz * MATRIZ_CREATE(int m, int n, char type){
 	if(m>0 && n>0 && (type=='i' || type == 'f')){
 		Matriz *matriz = (Matriz *)malloc(sizeof(Matriz));
+		if(!matriz){
+			USART_TRANSFER_STRING("Falta de Memória\r\n");
+			return NULL;
+		}
 		matriz->m = m;
 		matriz->n = n;
 		matriz->type = type;
 		matriz->el = (ElType *)calloc(m*n,sizeof(ElType));
+		if(!(matriz->el)){
+			USART_TRANSFER_STRING("Falta de Memória\r\n");
+			free(matriz);
+			return NULL;
+		}
 		return matriz;
 	}
 	return NULL;
@@ -172,6 +181,9 @@ Matriz * MATRIZ_SUM(Matriz**matr, Matriz *mat1, Matriz *mat2){
 	if(mat1 && mat2 && mat1->m == mat2->m && mat1->n == mat2->n){
 		int i,j;
 		*matr = MATRIZ_CREATE(mat1->m,mat1->n,mat1->type == 'f' || mat2->type =='f'?'f':'i');
+		if(!*matr){
+			return NULL;
+		}
 		for(i=0;i<(*matr)->m;i++)
 		for(j=0;j<(*matr)->n;j++)
 		*MATRIZ_EL((*matr),i,j) = EL_SUM(*MATRIZ_EL(mat1,i,j),*MATRIZ_EL(mat2,i,j),mat1->type,mat2->type,(*matr)->type);
@@ -184,6 +196,9 @@ Matriz * MATRIZ_MUL_ESCAL(Matriz ** matr, Matriz*mat1,ElType es,char type){
 	MATRIZ_FREE(matr);
 	if(mat1){
 		*matr = MATRIZ_CREATE(mat1->m,mat1->n,mat1->type == 'f' || type =='f'?'f':'i');
+		if(!*matr){
+			return NULL;
+		}
 		for(i=0;i<(*matr)->m;i++)
 		for(j=0;j<(*matr)->n;j++)
 		*MATRIZ_EL(*matr,i,j) = EL_MUL(*MATRIZ_EL(mat1,i,j),es,mat1->type,type,(*matr)->type);
@@ -196,6 +211,9 @@ Matriz * MATRIZ_MUL(Matriz** matr, Matriz *mat1, Matriz *mat2){
 	if(mat1 && mat2 && mat1->n == mat2->m){
 		int i,j,k;
 		*matr = MATRIZ_CREATE(mat1->m,mat2->n,mat1->type == 'f' || mat2->type =='f'?'f':'i');
+		if(!*matr){
+			return NULL;
+		}
 		for(i=0;i<(*matr)->m;i++)
 		for(j=0;j<(*matr)->n;j++){
 			MATRIZ_EL(*matr,i,j)->i=0;
@@ -214,6 +232,9 @@ Matriz * MATRIZ_TRANS(Matriz** matr, Matriz *mat){
 	MATRIZ_FREE(matr);
 	if(mat){
 		*matr = MATRIZ_CREATE(mat->n,mat->m,mat->type);
+		if(!*matr){
+			return NULL;
+		}
 		for(i=0;i<(*matr)->m;i++)
 		for(j=0;j<(*matr)->n;j++)
 		*MATRIZ_EL(*matr,i,j) = *MATRIZ_EL(mat,j,i);

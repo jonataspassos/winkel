@@ -19,15 +19,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_abbrev 00000828  00000000  00000000  00003a60  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000aed  00000000  00000000  00004288  2**0
+  8 .debug_line   00000af7  00000000  00000000  00004288  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000498  00000000  00000000  00004d78  2**2
+  9 .debug_frame  00000498  00000000  00000000  00004d80  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000508  00000000  00000000  00005210  2**0
+ 10 .debug_str    00000508  00000000  00000000  00005218  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000020a1  00000000  00000000  00005718  2**0
+ 11 .debug_loc    000020a1  00000000  00000000  00005720  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000c0  00000000  00000000  000077b9  2**0
+ 12 .debug_ranges 000000c0  00000000  00000000  000077c1  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -125,7 +125,7 @@ Disassembly of section .text:
 000001a8 <USART_CONFIG>:
 			}
 			break;
-	}
+		}
 	}
 	return;
 }
@@ -597,15 +597,15 @@ ElType EL_SUM(ElType a, ElType b, char type_a, char type_b, char type_c){
      54e:	c2 12       	cpse	r12, r18
      550:	8b c0       	rjmp	.+278    	; 0x668 <EL_SUM+0x144>
 		case 'i':
-			r.i=0;
-			switch(type_a){
+		r.i=0;
+		switch(type_a){
      552:	06 36       	cpi	r16, 0x66	; 102
      554:	19 f0       	breq	.+6      	; 0x55c <EL_SUM+0x38>
      556:	09 36       	cpi	r16, 0x69	; 105
      558:	89 f0       	breq	.+34     	; 0x57c <EL_SUM+0x58>
      55a:	0d c0       	rjmp	.+26     	; 0x576 <EL_SUM+0x52>
-				case 'i':r.i += a.i;break;
-				case 'f':r.i += (int)a.f;break;
+			case 'i':r.i += a.i;break;
+			case 'f':r.i += (int)a.f;break;
      55c:	46 2e       	mov	r4, r22
      55e:	57 2e       	mov	r5, r23
      560:	68 2e       	mov	r6, r24
@@ -623,28 +623,28 @@ ElType EL_SUM(ElType a, ElType b, char type_a, char type_b, char type_c){
 	r.i = 0;
 	switch(type_c){
 		case 'i':
-			r.i=0;
+		r.i=0;
      576:	41 2c       	mov	r4, r1
      578:	51 2c       	mov	r5, r1
      57a:	32 01       	movw	r6, r4
-			switch(type_a){
-				case 'i':r.i += a.i;break;
-				case 'f':r.i += (int)a.f;break;
-			}
-			switch(type_b){
+		switch(type_a){
+			case 'i':r.i += a.i;break;
+			case 'f':r.i += (int)a.f;break;
+		}
+		switch(type_b){
      57c:	86 e6       	ldi	r24, 0x66	; 102
      57e:	e8 16       	cp	r14, r24
      580:	41 f0       	breq	.+16     	; 0x592 <EL_SUM+0x6e>
      582:	29 e6       	ldi	r18, 0x69	; 105
      584:	e2 12       	cpse	r14, r18
      586:	11 c0       	rjmp	.+34     	; 0x5aa <EL_SUM+0x86>
-				case 'i':r.i += b.i;break;
+			case 'i':r.i += b.i;break;
      588:	48 0c       	add	r4, r8
      58a:	59 1c       	adc	r5, r9
      58c:	6a 1c       	adc	r6, r10
      58e:	7b 1c       	adc	r7, r11
      590:	0c c0       	rjmp	.+24     	; 0x5aa <EL_SUM+0x86>
-				case 'f':r.i += (int)b.f;break;
+			case 'f':r.i += (int)b.f;break;
      592:	c5 01       	movw	r24, r10
      594:	b4 01       	movw	r22, r8
      596:	0e 94 11 08 	call	0x1022	; 0x1022 <__fixsfsi>
@@ -656,21 +656,21 @@ ElType EL_SUM(ElType a, ElType b, char type_a, char type_b, char type_c){
      5a4:	59 1e       	adc	r5, r25
      5a6:	6a 1e       	adc	r6, r26
      5a8:	7b 1e       	adc	r7, r27
-			}
-			return r;
+		}
+		return r;
      5aa:	64 2d       	mov	r22, r4
      5ac:	75 2d       	mov	r23, r5
      5ae:	86 2d       	mov	r24, r6
      5b0:	97 2d       	mov	r25, r7
      5b2:	5e c0       	rjmp	.+188    	; 0x670 <EL_SUM+0x14c>
 		case 'f':
-			r.i=0;
-			switch(type_a){
+		r.i=0;
+		switch(type_a){
      5b4:	06 36       	cpi	r16, 0x66	; 102
      5b6:	71 f0       	breq	.+28     	; 0x5d4 <EL_SUM+0xb0>
      5b8:	09 36       	cpi	r16, 0x69	; 105
      5ba:	21 f5       	brne	.+72     	; 0x604 <EL_SUM+0xe0>
-				case 'i':r.f += a.i;break;
+			case 'i':r.f += a.i;break;
      5bc:	0e 94 49 08 	call	0x1092	; 0x1092 <__floatsisf>
      5c0:	20 e0       	ldi	r18, 0x00	; 0
      5c2:	30 e0       	ldi	r19, 0x00	; 0
@@ -681,7 +681,7 @@ ElType EL_SUM(ElType a, ElType b, char type_a, char type_b, char type_c){
      5ce:	68 2e       	mov	r6, r24
      5d0:	79 2e       	mov	r7, r25
      5d2:	1c c0       	rjmp	.+56     	; 0x60c <EL_SUM+0xe8>
-				case 'f':r.f += (int)a.f;break;
+			case 'f':r.f += (int)a.f;break;
      5d4:	46 2e       	mov	r4, r22
      5d6:	57 2e       	mov	r5, r23
      5d8:	68 2e       	mov	r6, r24
@@ -703,28 +703,28 @@ ElType EL_SUM(ElType a, ElType b, char type_a, char type_b, char type_c){
      5fe:	68 2e       	mov	r6, r24
      600:	79 2e       	mov	r7, r25
      602:	04 c0       	rjmp	.+8      	; 0x60c <EL_SUM+0xe8>
-				case 'i':r.i += b.i;break;
-				case 'f':r.i += (int)b.f;break;
-			}
-			return r;
+			case 'i':r.i += b.i;break;
+			case 'f':r.i += (int)b.f;break;
+		}
+		return r;
 		case 'f':
-			r.i=0;
+		r.i=0;
      604:	41 2c       	mov	r4, r1
      606:	51 2c       	mov	r5, r1
      608:	61 2c       	mov	r6, r1
      60a:	71 2c       	mov	r7, r1
-			switch(type_a){
-				case 'i':r.f += a.i;break;
-				case 'f':r.f += (int)a.f;break;
-			}
-			switch(type_b){
+		switch(type_a){
+			case 'i':r.f += a.i;break;
+			case 'f':r.f += (int)a.f;break;
+		}
+		switch(type_b){
      60c:	86 e6       	ldi	r24, 0x66	; 102
      60e:	e8 16       	cp	r14, r24
      610:	91 f0       	breq	.+36     	; 0x636 <EL_SUM+0x112>
      612:	29 e6       	ldi	r18, 0x69	; 105
      614:	e2 12       	cpse	r14, r18
      616:	23 c0       	rjmp	.+70     	; 0x65e <EL_SUM+0x13a>
-				case 'i':r.f += b.i;break;
+			case 'i':r.f += b.i;break;
      618:	c5 01       	movw	r24, r10
      61a:	b4 01       	movw	r22, r8
      61c:	0e 94 49 08 	call	0x1092	; 0x1092 <__floatsisf>
@@ -738,7 +738,7 @@ ElType EL_SUM(ElType a, ElType b, char type_a, char type_b, char type_c){
      630:	68 2e       	mov	r6, r24
      632:	79 2e       	mov	r7, r25
      634:	14 c0       	rjmp	.+40     	; 0x65e <EL_SUM+0x13a>
-				case 'f':r.f += (int)b.f;break;
+			case 'f':r.f += (int)b.f;break;
      636:	c5 01       	movw	r24, r10
      638:	b4 01       	movw	r22, r8
      63a:	0e 94 11 08 	call	0x1022	; 0x1022 <__fixsfsi>
@@ -756,8 +756,8 @@ ElType EL_SUM(ElType a, ElType b, char type_a, char type_b, char type_c){
      658:	57 2e       	mov	r5, r23
      65a:	68 2e       	mov	r6, r24
      65c:	79 2e       	mov	r7, r25
-			}
-			return r;
+		}
+		return r;
      65e:	64 2d       	mov	r22, r4
      660:	75 2d       	mov	r23, r5
      662:	86 2d       	mov	r24, r6
@@ -1074,10 +1074,10 @@ Matriz * MATRIZ_SUM(Matriz**matr, Matriz *mat1, Matriz *mat2){
      874:	0c f4       	brge	.+2      	; 0x878 <MATRIZ_SUM+0x90>
      876:	45 c0       	rjmp	.+138    	; 0x902 <__stack+0x3>
      878:	5e c0       	rjmp	.+188    	; 0x936 <__stack+0x37>
-			for(j=0;j<(*matr)->n;j++)
+		for(j=0;j<(*matr)->n;j++)
      87a:	c0 e0       	ldi	r28, 0x00	; 0
      87c:	d0 e0       	ldi	r29, 0x00	; 0
-				*MATRIZ_EL((*matr),i,j) = EL_SUM(*MATRIZ_EL(mat1,i,j),*MATRIZ_EL(mat2,i,j),mat1->type,mat2->type,(*matr)->type);
+		*MATRIZ_EL((*matr),i,j) = EL_SUM(*MATRIZ_EL(mat1,i,j),*MATRIZ_EL(mat2,i,j),mat1->type,mat2->type,(*matr)->type);
      87e:	ae 01       	movw	r20, r28
      880:	b1 01       	movw	r22, r2
      882:	c7 01       	movw	r24, r14
@@ -1121,7 +1121,7 @@ Matriz * MATRIZ_SUM(Matriz**matr, Matriz *mat1, Matriz *mat2){
 		int i,j;
 		*matr = MATRIZ_CREATE(mat1->m,mat1->n,mat1->type == 'f' || mat2->type =='f'?'f':'i');
 		for(i=0;i<(*matr)->m;i++)
-			for(j=0;j<(*matr)->n;j++)
+		for(j=0;j<(*matr)->n;j++)
      8d2:	21 96       	adiw	r28, 0x01	; 1
      8d4:	f2 01       	movw	r30, r4
      8d6:	e0 80       	ld	r14, Z
@@ -1154,7 +1154,7 @@ Matriz * MATRIZ_SUM(Matriz**matr, Matriz *mat1, Matriz *mat2){
      900:	1a c0       	rjmp	.+52     	; 0x936 <__stack+0x37>
      902:	21 2c       	mov	r2, r1
      904:	31 2c       	mov	r3, r1
-			for(j=0;j<(*matr)->n;j++)
+		for(j=0;j<(*matr)->n;j++)
      906:	f2 01       	movw	r30, r4
      908:	e0 80       	ld	r14, Z
      90a:	f1 80       	ldd	r15, Z+1	; 0x01
@@ -1168,7 +1168,7 @@ Matriz * MATRIZ_SUM(Matriz**matr, Matriz *mat1, Matriz *mat2){
      91a:	0c f4       	brge	.+2      	; 0x91e <__stack+0x1f>
      91c:	ae cf       	rjmp	.-164    	; 0x87a <MATRIZ_SUM+0x92>
      91e:	e5 cf       	rjmp	.-54     	; 0x8ea <MATRIZ_SUM+0x102>
-				*MATRIZ_EL((*matr),i,j) = EL_SUM(*MATRIZ_EL(mat1,i,j),*MATRIZ_EL(mat2,i,j),mat1->type,mat2->type,(*matr)->type);
+		*MATRIZ_EL((*matr),i,j) = EL_SUM(*MATRIZ_EL(mat1,i,j),*MATRIZ_EL(mat2,i,j),mat1->type,mat2->type,(*matr)->type);
 		return *matr;
 	}
 	return NULL;
@@ -1271,10 +1271,10 @@ Matriz * MATRIZ_MUL_ESCAL(Matriz ** matr, Matriz*mat1,ElType es,char type){
      9d2:	0c f4       	brge	.+2      	; 0x9d6 <MATRIZ_MUL_ESCAL+0x7a>
      9d4:	43 c0       	rjmp	.+134    	; 0xa5c <MATRIZ_MUL_ESCAL+0x100>
      9d6:	53 c0       	rjmp	.+166    	; 0xa7e <MATRIZ_MUL_ESCAL+0x122>
-			for(j=0;j<(*matr)->n;j++)
+		for(j=0;j<(*matr)->n;j++)
      9d8:	1e 82       	std	Y+6, r1	; 0x06
      9da:	1d 82       	std	Y+5, r1	; 0x05
-				*MATRIZ_EL(*matr,i,j) = EL_MUL(*MATRIZ_EL(mat1,i,j),es,mat1->type,type,(*matr)->type);
+		*MATRIZ_EL(*matr,i,j) = EL_MUL(*MATRIZ_EL(mat1,i,j),es,mat1->type,type,(*matr)->type);
      9dc:	4d 81       	ldd	r20, Y+5	; 0x05
      9de:	5e 81       	ldd	r21, Y+6	; 0x06
      9e0:	b3 01       	movw	r22, r6
@@ -1313,7 +1313,7 @@ Matriz * MATRIZ_MUL_ESCAL(Matriz ** matr, Matriz*mat1,ElType es,char type){
 	if(mat1){
 		*matr = MATRIZ_CREATE(mat1->m,mat1->n,mat1->type == 'f' || type =='f'?'f':'i');
 		for(i=0;i<(*matr)->m;i++)
-			for(j=0;j<(*matr)->n;j++)
+		for(j=0;j<(*matr)->n;j++)
      a24:	ed 81       	ldd	r30, Y+5	; 0x05
      a26:	fe 81       	ldd	r31, Y+6	; 0x06
      a28:	31 96       	adiw	r30, 0x01	; 1
@@ -1350,7 +1350,7 @@ Matriz * MATRIZ_MUL_ESCAL(Matriz ** matr, Matriz*mat1,ElType es,char type){
      a5a:	11 c0       	rjmp	.+34     	; 0xa7e <MATRIZ_MUL_ESCAL+0x122>
      a5c:	61 2c       	mov	r6, r1
      a5e:	71 2c       	mov	r7, r1
-			for(j=0;j<(*matr)->n;j++)
+		for(j=0;j<(*matr)->n;j++)
      a60:	f1 01       	movw	r30, r2
      a62:	00 81       	ld	r16, Z
      a64:	11 81       	ldd	r17, Z+1	; 0x01
@@ -1364,7 +1364,7 @@ Matriz * MATRIZ_MUL_ESCAL(Matriz ** matr, Matriz*mat1,ElType es,char type){
      a74:	0c f4       	brge	.+2      	; 0xa78 <MATRIZ_MUL_ESCAL+0x11c>
      a76:	b0 cf       	rjmp	.-160    	; 0x9d8 <MATRIZ_MUL_ESCAL+0x7c>
      a78:	e5 cf       	rjmp	.-54     	; 0xa44 <MATRIZ_MUL_ESCAL+0xe8>
-				*MATRIZ_EL(*matr,i,j) = EL_MUL(*MATRIZ_EL(mat1,i,j),es,mat1->type,type,(*matr)->type);
+		*MATRIZ_EL(*matr,i,j) = EL_MUL(*MATRIZ_EL(mat1,i,j),es,mat1->type,type,(*matr)->type);
 		return *matr;
 	}
 	return NULL;
@@ -1479,10 +1479,10 @@ Matriz * MATRIZ_MUL(Matriz** matr, Matriz *mat1, Matriz *mat2){
      b44:	0c f4       	brge	.+2      	; 0xb48 <MATRIZ_MUL+0x9c>
      b46:	89 c0       	rjmp	.+274    	; 0xc5a <MATRIZ_MUL+0x1ae>
      b48:	97 c0       	rjmp	.+302    	; 0xc78 <MATRIZ_MUL+0x1cc>
-			for(j=0;j<(*matr)->n;j++){
+		for(j=0;j<(*matr)->n;j++){
      b4a:	21 2c       	mov	r2, r1
      b4c:	31 2c       	mov	r3, r1
-				MATRIZ_EL(*matr,i,j)->i=0;
+			MATRIZ_EL(*matr,i,j)->i=0;
      b4e:	a1 01       	movw	r20, r2
      b50:	b3 01       	movw	r22, r6
      b52:	0e 94 c6 01 	call	0x38c	; 0x38c <MATRIZ_EL>
@@ -1492,7 +1492,7 @@ Matriz * MATRIZ_MUL(Matriz** matr, Matriz *mat1, Matriz *mat2){
      b5c:	1d 92       	st	X+, r1
      b5e:	1c 92       	st	X, r1
      b60:	13 97       	sbiw	r26, 0x03	; 3
-				for(k=0;k<mat1->n;k++){
+			for(k=0;k<mat1->n;k++){
      b62:	f5 01       	movw	r30, r10
      b64:	84 81       	ldd	r24, Z+4	; 0x04
      b66:	95 81       	ldd	r25, Z+5	; 0x05
@@ -1502,7 +1502,7 @@ Matriz * MATRIZ_MUL(Matriz** matr, Matriz *mat1, Matriz *mat2){
      b6e:	5a c0       	rjmp	.+180    	; 0xc24 <MATRIZ_MUL+0x178>
      b70:	18 86       	std	Y+8, r1	; 0x08
      b72:	1f 82       	std	Y+7, r1	; 0x07
-					*MATRIZ_EL(*matr,i,j) = EL_SUM(*MATRIZ_EL(*matr,i,j),
+				*MATRIZ_EL(*matr,i,j) = EL_SUM(*MATRIZ_EL(*matr,i,j),
      b74:	d4 01       	movw	r26, r8
      b76:	0d 91       	ld	r16, X+
      b78:	1c 91       	ld	r17, X
@@ -1514,7 +1514,7 @@ Matriz * MATRIZ_MUL(Matriz** matr, Matriz *mat1, Matriz *mat2){
      b86:	89 83       	std	Y+1, r24	; 0x01
      b88:	f8 01       	movw	r30, r16
      b8a:	16 81       	ldd	r17, Z+6	; 0x06
-						EL_MUL(*MATRIZ_EL(mat1,i,k),*MATRIZ_EL(mat2,k,j),
+				EL_MUL(*MATRIZ_EL(mat1,i,k),*MATRIZ_EL(mat2,k,j),
      b8c:	a1 01       	movw	r20, r2
      b8e:	6f 81       	ldd	r22, Y+7	; 0x07
      b90:	78 85       	ldd	r23, Y+8	; 0x08
@@ -1528,10 +1528,10 @@ Matriz * MATRIZ_MUL(Matriz** matr, Matriz *mat1, Matriz *mat2){
      ba2:	0e 94 c6 01 	call	0x38c	; 0x38c <MATRIZ_EL>
 		*matr = MATRIZ_CREATE(mat1->m,mat2->n,mat1->type == 'f' || mat2->type =='f'?'f':'i');
 		for(i=0;i<(*matr)->m;i++)
-			for(j=0;j<(*matr)->n;j++){
-				MATRIZ_EL(*matr,i,j)->i=0;
-				for(k=0;k<mat1->n;k++){
-					*MATRIZ_EL(*matr,i,j) = EL_SUM(*MATRIZ_EL(*matr,i,j),
+		for(j=0;j<(*matr)->n;j++){
+			MATRIZ_EL(*matr,i,j)->i=0;
+			for(k=0;k<mat1->n;k++){
+				*MATRIZ_EL(*matr,i,j) = EL_SUM(*MATRIZ_EL(*matr,i,j),
      ba6:	d7 01       	movw	r26, r14
      ba8:	2d 91       	ld	r18, X+
      baa:	3d 91       	ld	r19, X+
@@ -1581,9 +1581,9 @@ Matriz * MATRIZ_MUL(Matriz** matr, Matriz *mat1, Matriz *mat2){
 		int i,j,k;
 		*matr = MATRIZ_CREATE(mat1->m,mat2->n,mat1->type == 'f' || mat2->type =='f'?'f':'i');
 		for(i=0;i<(*matr)->m;i++)
-			for(j=0;j<(*matr)->n;j++){
-				MATRIZ_EL(*matr,i,j)->i=0;
-				for(k=0;k<mat1->n;k++){
+		for(j=0;j<(*matr)->n;j++){
+			MATRIZ_EL(*matr,i,j)->i=0;
+			for(k=0;k<mat1->n;k++){
      c08:	ef 81       	ldd	r30, Y+7	; 0x07
      c0a:	f8 85       	ldd	r31, Y+8	; 0x08
      c0c:	31 96       	adiw	r30, 0x01	; 1
@@ -1603,7 +1603,7 @@ Matriz * MATRIZ_MUL(Matriz** matr, Matriz *mat1, Matriz *mat2){
 		int i,j,k;
 		*matr = MATRIZ_CREATE(mat1->m,mat2->n,mat1->type == 'f' || mat2->type =='f'?'f':'i');
 		for(i=0;i<(*matr)->m;i++)
-			for(j=0;j<(*matr)->n;j++){
+		for(j=0;j<(*matr)->n;j++){
      c24:	bf ef       	ldi	r27, 0xFF	; 255
      c26:	2b 1a       	sub	r2, r27
      c28:	3b 0a       	sbc	r3, r27
@@ -1639,7 +1639,7 @@ Matriz * MATRIZ_MUL(Matriz** matr, Matriz *mat1, Matriz *mat2){
      c58:	0f c0       	rjmp	.+30     	; 0xc78 <MATRIZ_MUL+0x1cc>
      c5a:	61 2c       	mov	r6, r1
      c5c:	71 2c       	mov	r7, r1
-			for(j=0;j<(*matr)->n;j++){
+		for(j=0;j<(*matr)->n;j++){
      c5e:	f4 01       	movw	r30, r8
      c60:	80 81       	ld	r24, Z
      c62:	91 81       	ldd	r25, Z+1	; 0x01
@@ -1653,9 +1653,9 @@ Matriz * MATRIZ_MUL(Matriz** matr, Matriz *mat1, Matriz *mat2){
      c72:	0c f4       	brge	.+2      	; 0xc76 <MATRIZ_MUL+0x1ca>
      c74:	6a cf       	rjmp	.-300    	; 0xb4a <MATRIZ_MUL+0x9e>
      c76:	e5 cf       	rjmp	.-54     	; 0xc42 <MATRIZ_MUL+0x196>
-								(*matr)->type, (*matr)->type,(*matr)->type);
-				}
+				(*matr)->type, (*matr)->type,(*matr)->type);
 			}
+		}
 	}
 	return NULL;
 }
@@ -1708,7 +1708,7 @@ Matriz * MATRIZ_TRANS(Matriz** matr, Matriz *mat){
      cca:	d1 04       	cpc	r13, r1
      ccc:	09 f4       	brne	.+2      	; 0xcd0 <MATRIZ_TRANS+0x24>
      cce:	51 c0       	rjmp	.+162    	; 0xd72 <MATRIZ_TRANS+0xc6>
-	*matr = MATRIZ_CREATE(mat->n,mat->m,mat->type);
+		*matr = MATRIZ_CREATE(mat->n,mat->m,mat->type);
      cd0:	d6 01       	movw	r26, r12
      cd2:	12 96       	adiw	r26, 0x02	; 2
      cd4:	6d 91       	ld	r22, X+
@@ -1726,7 +1726,7 @@ Matriz * MATRIZ_TRANS(Matriz** matr, Matriz *mat){
      cee:	d7 01       	movw	r26, r14
      cf0:	8d 93       	st	X+, r24
      cf2:	9c 93       	st	X, r25
-	for(i=0;i<(*matr)->m;i++)
+		for(i=0;i<(*matr)->m;i++)
      cf4:	82 81       	ldd	r24, Z+2	; 0x02
      cf6:	93 81       	ldd	r25, Z+3	; 0x03
      cf8:	18 16       	cp	r1, r24
@@ -1736,7 +1736,7 @@ Matriz * MATRIZ_TRANS(Matriz** matr, Matriz *mat){
 		for(j=0;j<(*matr)->n;j++)
      d00:	c0 e0       	ldi	r28, 0x00	; 0
      d02:	d0 e0       	ldi	r29, 0x00	; 0
-				*MATRIZ_EL(*matr,i,j) = *MATRIZ_EL(mat,j,i);
+		*MATRIZ_EL(*matr,i,j) = *MATRIZ_EL(mat,j,i);
      d04:	ae 01       	movw	r20, r28
      d06:	b8 01       	movw	r22, r16
      d08:	0e 94 c6 01 	call	0x38c	; 0x38c <MATRIZ_EL>
@@ -1758,8 +1758,8 @@ Matriz * MATRIZ_TRANS(Matriz** matr, Matriz *mat){
 	int i,j;
 	MATRIZ_FREE(matr);
 	if(mat){
-	*matr = MATRIZ_CREATE(mat->n,mat->m,mat->type);
-	for(i=0;i<(*matr)->m;i++)
+		*matr = MATRIZ_CREATE(mat->n,mat->m,mat->type);
+		for(i=0;i<(*matr)->m;i++)
 		for(j=0;j<(*matr)->n;j++)
      d2c:	21 96       	adiw	r28, 0x01	; 1
      d2e:	d7 01       	movw	r26, r14
@@ -1775,8 +1775,8 @@ Matriz * MATRIZ_TRANS(Matriz** matr, Matriz *mat){
 	int i,j;
 	MATRIZ_FREE(matr);
 	if(mat){
-	*matr = MATRIZ_CREATE(mat->n,mat->m,mat->type);
-	for(i=0;i<(*matr)->m;i++)
+		*matr = MATRIZ_CREATE(mat->n,mat->m,mat->type);
+		for(i=0;i<(*matr)->m;i++)
      d40:	0f 5f       	subi	r16, 0xFF	; 255
      d42:	1f 4f       	sbci	r17, 0xFF	; 255
      d44:	d7 01       	movw	r26, r14
@@ -1803,8 +1803,8 @@ Matriz * MATRIZ_TRANS(Matriz** matr, Matriz *mat){
      d6c:	13 06       	cpc	r1, r19
      d6e:	44 f2       	brlt	.-112    	; 0xd00 <MATRIZ_TRANS+0x54>
      d70:	e7 cf       	rjmp	.-50     	; 0xd40 <MATRIZ_TRANS+0x94>
-				*MATRIZ_EL(*matr,i,j) = *MATRIZ_EL(mat,j,i);
-	return *matr;
+		*MATRIZ_EL(*matr,i,j) = *MATRIZ_EL(mat,j,i);
+		return *matr;
 	}
 	return NULL;
      d72:	e0 e0       	ldi	r30, 0x00	; 0
@@ -1824,6 +1824,9 @@ Matriz * MATRIZ_TRANS(Matriz** matr, Matriz *mat){
      d8c:	08 95       	ret
 
 00000d8e <main>:
+#include "../../atmel_libs/usart.h"
+#include "../../atmel_libs/matriz.h"
+
 
 int main(void)
 {
@@ -1943,6 +1946,7 @@ int main(void)
      e54:	8e e2       	ldi	r24, 0x2E	; 46
      e56:	91 e0       	ldi	r25, 0x01	; 1
      e58:	0e 94 eb 00 	call	0x1d6	; 0x1d6 <USART_TRANSFER_STRING>
+	
 	MATRIZ_PRINT(mat2);
      e5c:	8b 81       	ldd	r24, Y+3	; 0x03
      e5e:	9c 81       	ldd	r25, Y+4	; 0x04
@@ -1951,6 +1955,7 @@ int main(void)
      e64:	8e e2       	ldi	r24, 0x2E	; 46
      e66:	91 e0       	ldi	r25, 0x01	; 1
      e68:	0e 94 eb 00 	call	0x1d6	; 0x1d6 <USART_TRANSFER_STRING>
+	
 	MATRIZ_PRINT(mat3);
      e6c:	8d 81       	ldd	r24, Y+5	; 0x05
      e6e:	9e 81       	ldd	r25, Y+6	; 0x06
@@ -1959,6 +1964,7 @@ int main(void)
      e74:	8e e2       	ldi	r24, 0x2E	; 46
      e76:	91 e0       	ldi	r25, 0x01	; 1
      e78:	0e 94 eb 00 	call	0x1d6	; 0x1d6 <USART_TRANSFER_STRING>
+	
 	MATRIZ_SUM(&mat3,mat,mat2);
      e7c:	4b 81       	ldd	r20, Y+3	; 0x03
      e7e:	5c 81       	ldd	r21, Y+4	; 0x04
@@ -1975,6 +1981,7 @@ int main(void)
      e94:	8e e2       	ldi	r24, 0x2E	; 46
      e96:	91 e0       	ldi	r25, 0x01	; 1
      e98:	0e 94 eb 00 	call	0x1d6	; 0x1d6 <USART_TRANSFER_STRING>
+	
 	MATRIZ_MUL_ESCAL(&mat3,mat,temp,'f');
      e9c:	69 81       	ldd	r22, Y+1	; 0x01
      e9e:	7a 81       	ldd	r23, Y+2	; 0x02
@@ -1994,6 +2001,7 @@ int main(void)
      eba:	8e e2       	ldi	r24, 0x2E	; 46
      ebc:	91 e0       	ldi	r25, 0x01	; 1
      ebe:	0e 94 eb 00 	call	0x1d6	; 0x1d6 <USART_TRANSFER_STRING>
+	
 	MATRIZ_MUL(&mat3,mat,mat2);
      ec2:	4b 81       	ldd	r20, Y+3	; 0x03
      ec4:	5c 81       	ldd	r21, Y+4	; 0x04
@@ -2010,6 +2018,7 @@ int main(void)
      eda:	8e e2       	ldi	r24, 0x2E	; 46
      edc:	91 e0       	ldi	r25, 0x01	; 1
      ede:	0e 94 eb 00 	call	0x1d6	; 0x1d6 <USART_TRANSFER_STRING>
+	
 	MATRIZ_TRANS(&mat3,mat2);
      ee2:	6b 81       	ldd	r22, Y+3	; 0x03
      ee4:	7c 81       	ldd	r23, Y+4	; 0x04
@@ -2024,6 +2033,7 @@ int main(void)
      ef6:	8e e2       	ldi	r24, 0x2E	; 46
      ef8:	91 e0       	ldi	r25, 0x01	; 1
      efa:	0e 94 eb 00 	call	0x1d6	; 0x1d6 <USART_TRANSFER_STRING>
+	
 	MATRIZ_FREE(&mat);
      efe:	ce 01       	movw	r24, r28
      f00:	01 96       	adiw	r24, 0x01	; 1
@@ -2036,6 +2046,7 @@ int main(void)
      f0e:	ce 01       	movw	r24, r28
      f10:	05 96       	adiw	r24, 0x05	; 5
      f12:	0e 94 7d 02 	call	0x4fa	; 0x4fa <MATRIZ_FREE>
+	
 	MATRIZ_PRINT(mat);
      f16:	89 81       	ldd	r24, Y+1	; 0x01
      f18:	9a 81       	ldd	r25, Y+2	; 0x02
@@ -2044,6 +2055,7 @@ int main(void)
      f1e:	8e e2       	ldi	r24, 0x2E	; 46
      f20:	91 e0       	ldi	r25, 0x01	; 1
      f22:	0e 94 eb 00 	call	0x1d6	; 0x1d6 <USART_TRANSFER_STRING>
+	
 	MATRIZ_PRINT(mat2);
      f26:	8b 81       	ldd	r24, Y+3	; 0x03
      f28:	9c 81       	ldd	r25, Y+4	; 0x04
@@ -2052,6 +2064,7 @@ int main(void)
      f2e:	8e e2       	ldi	r24, 0x2E	; 46
      f30:	91 e0       	ldi	r25, 0x01	; 1
      f32:	0e 94 eb 00 	call	0x1d6	; 0x1d6 <USART_TRANSFER_STRING>
+	
 	MATRIZ_PRINT(mat3);
      f36:	8d 81       	ldd	r24, Y+5	; 0x05
      f38:	9e 81       	ldd	r25, Y+6	; 0x06
