@@ -2,7 +2,7 @@
 #define I2C_H
 #include <avr/io.h>
 
-#include <repository/usart.h>
+#include "usart.h"
 
 #define I2C_READ 1
 #define I2C_WRITE 0

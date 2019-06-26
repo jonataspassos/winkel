@@ -1,11 +1,11 @@
 #ifndef HMC5883L_H
 #define HMC5883L_H
-#include <repository/usart.h>
+#include "usart.h"
 #ifndef F_CPU
 	#define F_CPU 16000000UL
 #endif
 #include <avr/io.h>
-#include <repository/i2c.h>
+#include "i2c.h"
 #include <util/delay.h>
 
 #define HMC5883L_ADDRESS 0x3c
