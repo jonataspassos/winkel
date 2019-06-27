@@ -26,13 +26,12 @@ int main(void)
 	
 	_delay_ms(4000);
 	
-	USART_TRANSFER_STRING("AccelX\t");
+	/*USART_TRANSFER_STRING("AccelX\t");
 	USART_TRANSFER_STRING("AccelY\t");
 	USART_TRANSFER_STRING("AccelZ\t");
-	USART_TRANSFER_STRING("Temperatura\t");
 	USART_TRANSFER_STRING("gyroX\t");
 	USART_TRANSFER_STRING("gyroY\t");
-	USART_TRANSFER_STRING("gyroZ\t");
+	USART_TRANSFER_STRING("gyroZ\t");*/
 	USART_TRANSFER_STRING("magnetX\t");
 	USART_TRANSFER_STRING("magnetY\t");
 	USART_TRANSFER_STRING("magnetZ");
@@ -43,28 +42,45 @@ int main(void)
 		MPU6050_Read(&AccelX, &AccelY, &AccelZ, &Temperatura, &gyroX, &gyroY, &gyroZ);
 		HMC5883L_Read(&magnetX,&magnetY,&magnetZ);
 
-		USART_TRANSFER_INT(AccelX);
+		int acc_sensibilty = 16384/10;
+		int gyro_sensibilty = 131;
+		int magnet_sensibility = 230;
+		
+		//AccelX = AccelX/acc_sensibilty;
+		
+		
+		
+		/*USART_TRANSFER_INT((AccelX/acc_sensibilty)*100);
 		USART_TRANSFER_STRING("\t");
-		USART_TRANSFER_INT(AccelY);
+		USART_TRANSFER_INT((AccelY/acc_sensibilty)*100);
 		USART_TRANSFER_STRING("\t");
-		USART_TRANSFER_INT(AccelZ);
+		USART_TRANSFER_INT((AccelZ/acc_sensibilty)*100);
 		USART_TRANSFER_STRING("\t");
-		USART_TRANSFER_INT(Temperatura);
+		USART_TRANSFER_INT((gyroX/gyro_sensibilty)*100);
 		USART_TRANSFER_STRING("\t");
-		USART_TRANSFER_INT(gyroX);
+		USART_TRANSFER_INT((gyroY/gyro_sensibilty)*100);
 		USART_TRANSFER_STRING("\t");
-		USART_TRANSFER_INT(gyroY);
-		USART_TRANSFER_STRING("\t");
-		USART_TRANSFER_INT(gyroZ);
-		USART_TRANSFER_STRING("\t");
+		USART_TRANSFER_INT((gyroZ/gyro_sensibilty)*100);
+		USART_TRANSFER_STRING("\t");*/
 		USART_TRANSFER_INT(magnetX);
 		USART_TRANSFER_STRING("\t");
 		USART_TRANSFER_INT(magnetY);
 		USART_TRANSFER_STRING("\t");
 		USART_TRANSFER_INT(magnetZ);
+		USART_TRANSFER_STRING("\t");
+		USART_TRANSFER_INT((magnetX/magnet_sensibility)*100);
+		USART_TRANSFER_STRING("\t");
+		USART_TRANSFER_INT((magnetY/magnet_sensibility)*100);
+		USART_TRANSFER_STRING("\t");
+		USART_TRANSFER_INT((magnetZ/magnet_sensibility)*100);
 		
 		
 		USART_TRANSFER_STRING("\r\n");
+		
+		
+		
+		//
+		
     }
 }
 
