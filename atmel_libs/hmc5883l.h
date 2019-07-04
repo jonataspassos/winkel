@@ -9,7 +9,7 @@
 #include <util/delay.h>
 
 #define HMC5883L_ADDRESS 0x3c
-#define HMC5883L_RA_CONFA 0x00
+#define HMC5883L_RA_CONFA 0x10
 #define HMC5883L_RA_CONFB 0xE0
 #define HMC5883L_RA_MODE 0x02
 #define HMC5883L_RA_MAGNET_XOUT_H 0x03
