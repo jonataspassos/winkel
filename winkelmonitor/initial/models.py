@@ -4,7 +4,7 @@ from django.utils import timezone
 # Create your models here.
 
 class Coordenada(models.Model):
-    time = models.DateTimeField('instante', default = timezone.now())
+    time = models.DateTimeField('instante')
     pitch = models.FloatField()
     yaw = models.FloatField()
     roll = models.FloatField()
