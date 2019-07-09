@@ -1,11 +1,10 @@
 import urllib.request
 
-hostname = "localhost"
-port = "8000"
+hostname = "localhost:8000"
 package = "initial/"
 
 def httpSend(pitch,roll, yaw):
-    return urllib.request.url(hostname + ":" + port + "/" + package + str(float(pitch)) + "/"+ str(float(roll)) + "/"+ str(float(yaw)) + "/").read()
+    return urllib.request.url(hostname + "/" + package + str(float(pitch)) + "/"+ str(float(roll)) + "/"+ str(float(yaw)) + "/").read()
 
 def do_nothing():
     return
