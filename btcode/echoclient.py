@@ -4,6 +4,8 @@ from bluetooth import *
 HOST = sys.argv[1]       # The remote host
 PORT = 8888                 # Server port
 
+mac = "B4:F7:A1:61:49:86"
+
 s=BluetoothSocket( RFCOMM )
 
 s.connect((HOST, PORT))
