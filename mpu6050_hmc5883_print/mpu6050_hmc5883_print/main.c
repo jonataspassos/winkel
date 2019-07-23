@@ -36,11 +36,17 @@ int main(void) {
 	float th2 = 0;
 	float th3 = 0;
 	
-	int KalmanFilter(float Acc, float Gyro, float offset, float P_11, float P_12, float P_21, float P_22){
-		
-		float retorno[5];
+	float KalmanX;
+	float KalmanY;
+	float KalmanZ;
+	
+	typedef struct {
+		float K,O,P1,P2,P3,P4;
+	} FKalman ;
+
+	FKalman KalmanFilter(float Acc, float Gyro, float offset, float P_11, float P_12, float P_21, float P_22){
+			
 		float KF_angulo;
-		
 		float y,S;
 		float K_1,K_2;
 		
@@ -59,20 +65,26 @@ int main(void) {
 		KF_angulo += K_1 * y;
 		offset += K_2 * y;
 		
+		FKalman SetFKalman (float K, float O, float P1, float P2, float P3, float P4)
+			{
+				FKalman R;
+				R.K =K;
+				R.O=O;
+				R.P1=P1;
+				R.P2=P2;
+				R.P3=P3;
+				R.P4=P4;
+				return R;
+			}
+		FKalman R;
+		R = SetFKalman(KF_angulo,offset,P_11,P_12,P_21,P_22);
 		
-		//estrutura do vetor de retorno:
-		retorno[0] = KF_angulo;
-		retorno[1] = offset;		
-		retorno[2] = P_11;
-		retorno[3] = P_12;
-		retorno[4] = P_21;
-		retorno[5] = P_22;		
-		return retorno;
+		return R;
 	}
 	
 	float AccelX, AccelY, AccelZ, Temperatura, gyroX, gyroY, gyroZ;
 	float magnetX, magnetY, magnetZ;
-	float valores_X[5],valores_Y[5],valores_Z[5];
+	FKalman valores_X,valores_Y,valores_Z;
 	
 	
     USART_CONFIG();
@@ -104,12 +116,29 @@ int main(void) {
 		
 		
 		valores_X = KalmanFilter(AccelX,gyroX,offset_x,XP_11,XP_12,XP_21,XP_22);
+		KalmanX=valores_X.K;
+		offset_x=valores_X.O;
+		XP_11=valores_X.P1;
+		XP_12=valores_X.P2;
+		XP_21=valores_X.P3;
+		XP_22=valores_X.P4;
 		valores_Y = KalmanFilter(AccelY,gyroY,offset_y,YP_11,YP_12,YP_21,YP_11);
+		KalmanY=valores_Y.K;
+		offset_y=valores_Y.O;
+		YP_11=valores_Y.P1;
+		YP_12=valores_Y.P2;
+		YP_21=valores_Y.P3;
+		YP_22=valores_Y.P4;
 		valores_Z = KalmanFilter(AccelZ,gyroZ,offset_z,ZP_11,ZP_12,ZP_21,ZP_11);
-		
+		KalmanZ=valores_Z.K;
+		offset_z=valores_Z.O;
+		ZP_11=valores_Z.P1;
+		ZP_12=valores_Z.P2;
+		ZP_21=valores_Z.P3;
+		ZP_22=valores_Z.P4;
 		USART_TRANSFER_STRING("valores_X\t");
 		USART_TRANSFER_STRING("\r\n");
-		USART_TRANSFER_FLOAT(valores_X);
+		USART_TRANSFER_FLOAT(KalmanX);
 		USART_TRANSFER_STRING("\t");
 
 		
