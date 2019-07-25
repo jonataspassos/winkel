@@ -37,12 +37,24 @@ int main(void) {
 	float th3 = 0;
 	
 	float KalmanX;
-	float KalmanY;
-	float KalmanZ;
+	int KalmanY;
+	int KalmanZ;
 	
 	typedef struct {
 		float K,O,P1,P2,P3,P4;
 	} FKalman ;
+	
+	FKalman SetFKalman (float K, float O, float P1, float P2, float P3, float P4)
+	{
+		FKalman R;
+		R.K =K;
+		R.O=O;
+		R.P1=P1;
+		R.P2=P2;
+		R.P3=P3;
+		R.P4=P4;
+		return R;
+	}
 
 	FKalman KalmanFilter(float Acc, float Gyro, float offset, float P_11, float P_12, float P_21, float P_22){
 			
@@ -65,25 +77,14 @@ int main(void) {
 		KF_angulo += K_1 * y;
 		offset += K_2 * y;
 		
-		FKalman SetFKalman (float K, float O, float P1, float P2, float P3, float P4)
-			{
-				FKalman R;
-				R.K =K;
-				R.O=O;
-				R.P1=P1;
-				R.P2=P2;
-				R.P3=P3;
-				R.P4=P4;
-				return R;
-			}
+		
 		FKalman R;
 		R = SetFKalman(KF_angulo,offset,P_11,P_12,P_21,P_22);
-		
 		return R;
 	}
 	
-	float AccelX, AccelY, AccelZ, Temperatura, gyroX, gyroY, gyroZ;
-	float magnetX, magnetY, magnetZ;
+	int AccelX, AccelY, AccelZ, Temperatura, gyroX, gyroY, gyroZ;
+	int magnetX, magnetY, magnetZ;
 	FKalman valores_X,valores_Y,valores_Z;
 	
 	
@@ -102,49 +103,76 @@ int main(void) {
 
 		float acc_sensibilty = 16384/10;
 		float gyro_sensibilty = 131;
-		float magnet_sensibility = 230;
-		
-		AccelX= (AccelX/acc_sensibilty);
-		AccelY= (AccelY/acc_sensibilty);
-		AccelZ= (AccelZ/acc_sensibilty);
-		gyroX= (gyroX/acc_sensibilty);
-		gyroY= (gyroY/acc_sensibilty);
-		gyroZ= (gyroZ/acc_sensibilty);
-		magnetX= (magnetX/acc_sensibilty);
-		magnetY= (magnetY/acc_sensibilty);
-		magnetZ= (magnetZ/acc_sensibilty);
+		int magnet_sensibility = 230;
 		
 		
-		valores_X = KalmanFilter(AccelX,gyroX,offset_x,XP_11,XP_12,XP_21,XP_22);
+		 valores_X = KalmanFilter(AccelX/acc_sensibilty,gyroX/gyro_sensibilty,offset_x,XP_11,XP_12,XP_21,XP_22);
 		KalmanX=valores_X.K;
 		offset_x=valores_X.O;
 		XP_11=valores_X.P1;
 		XP_12=valores_X.P2;
 		XP_21=valores_X.P3;
 		XP_22=valores_X.P4;
-		valores_Y = KalmanFilter(AccelY,gyroY,offset_y,YP_11,YP_12,YP_21,YP_11);
+		valores_Y = KalmanFilter(AccelY/acc_sensibilty,gyroY/gyro_sensibilty,offset_y,YP_11,YP_12,YP_21,YP_11);
 		KalmanY=valores_Y.K;
 		offset_y=valores_Y.O;
 		YP_11=valores_Y.P1;
 		YP_12=valores_Y.P2;
 		YP_21=valores_Y.P3;
 		YP_22=valores_Y.P4;
-		valores_Z = KalmanFilter(AccelZ,gyroZ,offset_z,ZP_11,ZP_12,ZP_21,ZP_11);
+		valores_Z = KalmanFilter(AccelZ/acc_sensibilty,gyroZ/gyro_sensibilty,offset_z,ZP_11,ZP_12,ZP_21,ZP_11);
 		KalmanZ=valores_Z.K;
 		offset_z=valores_Z.O;
 		ZP_11=valores_Z.P1;
 		ZP_12=valores_Z.P2;
 		ZP_21=valores_Z.P3;
 		ZP_22=valores_Z.P4;
-		USART_TRANSFER_STRING("valores_X\t");
+		
+		/*
+		//TESTE EM X
+		USART_TRANSFER_STRING("AccelX\t");
+		USART_TRANSFER_STRING("gyroX\t");
+		USART_TRANSFER_STRING("Valores_X\t");
 		USART_TRANSFER_STRING("\r\n");
-		USART_TRANSFER_FLOAT(KalmanX);
+		USART_TRANSFER_INT((AccelX/acc_sensibilty)*100);
 		USART_TRANSFER_STRING("\t");
+		USART_TRANSFER_INT((gyroX/gyro_sensibilty)*100);
+		USART_TRANSFER_STRING("\t");
+		USART_TRANSFER_FLOAT(KalmanX);
+		USART_TRANSFER_STRING("\t"); */
+		
+		
+		//TESTE EM Y
+		USART_TRANSFER_STRING("AccelY\t");
+		USART_TRANSFER_STRING("gyroY\t");
+		USART_TRANSFER_STRING("Valores_Y\t");
+		USART_TRANSFER_STRING("\r\n");
+		USART_TRANSFER_INT((AccelY/acc_sensibilty)*100);
+		USART_TRANSFER_STRING("\t");
+		USART_TRANSFER_INT((gyroY/gyro_sensibilty)*100);
+		USART_TRANSFER_STRING("\t");
+		USART_TRANSFER_FLOAT(KalmanY);
+		USART_TRANSFER_STRING("\t"); 
+		
+		/*
+		//TESTE EM Z
+		USART_TRANSFER_STRING("AccelZ\t");
+		USART_TRANSFER_STRING("gyroZ\t");
+		USART_TRANSFER_STRING("Valores_Z\t");
+		USART_TRANSFER_STRING("\r\n");
+		USART_TRANSFER_INT((AccelZ/acc_sensibilty)*100);
+		USART_TRANSFER_STRING("\t");
+		USART_TRANSFER_INT((gyroZ/gyro_sensibilty)*100);
+		USART_TRANSFER_STRING("\t");
+		USART_TRANSFER_FLOAT(KalmanZ);
+		USART_TRANSFER_STRING("\t"); 
+		*/
+
 
 		
 		
-		/*
-		USART_TRANSFER_STRING("AccelX\t");
+		
+		/*USART_TRANSFER_STRING("AccelX\t");
 		USART_TRANSFER_STRING("AccelY\t");
 		USART_TRANSFER_STRING("AccelZ\t");
 		USART_TRANSFER_STRING("gyroX\t");
@@ -172,8 +200,8 @@ int main(void) {
 		USART_TRANSFER_STRING("\t");
 		USART_TRANSFER_INT((magnetY/magnet_sensibility)*100);
 		USART_TRANSFER_STRING("\t");
-		USART_TRANSFER_INT((magnetZ/magnet_sensibility)*100);
-		*/
+		USART_TRANSFER_INT((magnetZ/magnet_sensibility)*100);*/
+		
 		
 		USART_TRANSFER_STRING("\r\n");
 		
