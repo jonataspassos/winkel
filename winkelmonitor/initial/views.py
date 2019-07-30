@@ -14,3 +14,7 @@ def saveCoord(request,pitch,roll,yaw):
 
 def getValue(request):
     return JsonResponse(getValueBack())
+
+def teste(request,lalala):
+    print(lalala)
+    return HttpResponse('blz')
