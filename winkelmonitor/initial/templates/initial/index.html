@@ -1,0 +1,113 @@
+{% load static %}
+<html>
+
+<head>
+    <script src="{% static 'initial/js/d3.js' %}"></script>
+    <script src="{% static 'initial/js/three.js' %}"></script>
+    <script src="{% static 'initial/js/AxisCanvas.js' %}"></script>
+    <style>
+        .arrange-horizontally>* {
+            display: inline-block;
+            text-align: center;
+        }
+
+        .arrange-vertically>* {
+            display: block;
+        }
+
+        .d1 {
+            width: 8%;
+        }
+
+        .d2 {
+            width: 16%;
+        }
+
+        .d3 {
+            width: 24%;
+        }
+
+        .d4 {
+            width: 33%;
+        }
+
+        .d5 {
+            width: 41%;
+        }
+
+        .d6 {
+            width: 49%;
+        }
+
+        .d7 {
+            width: 58%;
+        }
+
+        .d8 {
+            width: 66%;
+        }
+
+        .d9 {
+            width: 74%;
+        }
+
+        .d10 {
+            width: 83%;
+        }
+
+        .d11 {
+            width: 91%;
+        }
+
+        .d12 {
+            width: 99%;
+        }
+
+        .bar {
+            height: 10px;
+        }
+
+        #cont {
+            text-align: center;
+        }
+
+        #canvas {
+            height: 600px;
+            width: 800px;
+        }
+
+        #svg {
+            height: 600px;
+            width: 800px;
+            z-index: 200;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Winkel Monitor</h1>
+
+    <div class="arrange-horizontally">
+        <div class="d4 bar" style="background-color: green">
+            <h4>Pitch - Y</h4>
+            <p id="pitch">12</p>
+        </div>
+        <div class="d4 bar" style="background-color: red">
+            <h4>Roll - X</h4>
+            <p id="roll">13</p>
+        </div>
+        <div class="d4 bar" style="background-color: blue">
+            <h4>Yaw - Z</h4>
+            <p id="yaw">14</p>
+        </div>
+    </div>
+    <div id="cont" class="arrange-horizontally">
+        <div id="svg"></div>
+        <div id="canvas"></div>
+    </div>
+
+    <script src="{% static 'initial/js/index.js' %}"></script>
+</body>
+
+</html>

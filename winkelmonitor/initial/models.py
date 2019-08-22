@@ -9,5 +9,5 @@ class Coordenada(models.Model):
     yaw = models.FloatField()
     roll = models.FloatField()
     def __str__(self):
-        return str(self.time)+" Pitch:"+str(self.pitch)+" Yaw:"+str(self.yaw)+" Roll:"+str(self.roll)
+        return str(self.time)+" Pitch:"+str(self.pitch)+" Roll:"+str(self.roll)+" Yaw:"+str(self.yaw)
 
