@@ -5,84 +5,14 @@
     <script src="{% static 'initial/js/d3.js' %}"></script>
     <script src="{% static 'initial/js/three.js' %}"></script>
     <script src="{% static 'initial/js/AxisCanvas.js' %}"></script>
-    <style>
-        .arrange-horizontally>* {
-            display: inline-block;
-            text-align: center;
+    <script src="{% static 'initial/js/WebGL.js' %}"></script>
+    <script src="{% static 'initial/js/WUtil.js' %}"></script>
+    <script>
+        function getValue() {
+            http_get("{% url 'initial:getvalue' %}", draw)
         }
-
-        .arrange-vertically>* {
-            display: block;
-        }
-
-        .d1 {
-            width: 8%;
-        }
-
-        .d2 {
-            width: 16%;
-        }
-
-        .d3 {
-            width: 24%;
-        }
-
-        .d4 {
-            width: 33%;
-        }
-
-        .d5 {
-            width: 41%;
-        }
-
-        .d6 {
-            width: 49%;
-        }
-
-        .d7 {
-            width: 58%;
-        }
-
-        .d8 {
-            width: 66%;
-        }
-
-        .d9 {
-            width: 74%;
-        }
-
-        .d10 {
-            width: 83%;
-        }
-
-        .d11 {
-            width: 91%;
-        }
-
-        .d12 {
-            width: 99%;
-        }
-
-        .bar {
-            height: 10px;
-        }
-
-        #cont {
-            text-align: center;
-        }
-
-        #canvas {
-            height: 600px;
-            width: 800px;
-        }
-
-        #svg {
-            height: 600px;
-            width: 800px;
-            z-index: 200;
-            position: absolute;
-        }
-    </style>
+    </script>
+     <link href="{% static 'initial/css/sistema.css' %}" rel="stylesheet">
 </head>
 
 <body>

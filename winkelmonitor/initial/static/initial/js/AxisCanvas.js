@@ -7,7 +7,7 @@ var Material = THREE.MeshLambertMaterial;
 function AxisCanvas() {
     var axis_canvas = new THREE.Group();
     //Origin - Axis
-    var geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+    var geometry = new THREE.SphereGeometry( 0.2, 32, 32 );
     var material = new Material({ color: 0xFFFF00, side: THREE.DoubleSide });
     var origin = new THREE.Mesh(geometry, material);
     axis_canvas.add(origin);
