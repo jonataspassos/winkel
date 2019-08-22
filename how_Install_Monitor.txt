@@ -1,0 +1,12 @@
+#instalando monitor
+	#instale o anaconda
+	#abra o terminal do anaconda
+	conda create -n winkel python=3.6
+	conda activate winkel
+	pip install Django
+
+#Navegar até o diretorio winkelMonitor
+	cd ./....../winkelmonitor
+
+#iniciando servidor
+	python manage.py runserver 0.0.0.0:8000
