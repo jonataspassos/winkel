@@ -1,7 +1,7 @@
-function formatFloat(f,ncasas){
-    ncasas = ncasas||2;
-    var pow = Math.pow(10,ncasas);
-    return Math.round(f*pow)/pow;
+function formatFloat(f, ncasas) {
+    ncasas = ncasas || 2;
+    var pow = Math.pow(10, ncasas);
+    return Math.round(f * pow) / pow;
 }
 
 function http_get(url, funct) {

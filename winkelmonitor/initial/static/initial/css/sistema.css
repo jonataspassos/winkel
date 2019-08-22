@@ -74,3 +74,31 @@
     z-index: 200;
     position: absolute;
 }
+
+.roll{
+    color: red;
+    fill: red;
+    background-color: red;
+    stroke:red;
+}
+
+.pitch{
+    color: green;
+    fill: green;
+    background-color: green;
+    stroke:green;
+}
+
+.yaw{
+    color: blue;
+    fill: blue;
+    background-color: blue;
+    stroke:blue;
+}
+
+.back-circle{
+    fill: #fff !important;
+    opacity: 0.2;
+    stroke-width:1.5;
+    stroke:#FFF;
+}

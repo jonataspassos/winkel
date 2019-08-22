@@ -3,7 +3,7 @@ var state = {};
 var width = 800, height = 600;
 
 //SETTINGS - SVG
-var svg = d3.select("#svg").append("svg").attr("width", width).attr("height", height);
+var svg = d3.select("#svg").select("svg").attr("width", width).attr("height", height);
 
 
 //SETTINGS - CANVAS
@@ -33,8 +33,9 @@ scene.add(axis_canvas);
 renderer.render(scene, camera);
 
 //ELEMENTS - SVG
-
-
+var air_roll = svg.select("#orto-roll");
+var air_pitch = svg.select("#orto-pitch");
+var air_yaw = svg.select("#orto-yaw");
 //INTERACTIONS
 function animate() {
     //Recursion
@@ -57,6 +58,9 @@ function animate() {
     d3.select("#yaw").text(formatFloat("" + axis_canvas.rotation.z) + "\trad");
 
     //SVG ELEMENTS
+    air_roll.attr("transform","translate(75,75)rotate("+axis_canvas.rotation.x*180/Math.PI+")");
+    air_pitch.attr("transform","translate(75,225)rotate("+axis_canvas.rotation.y*180/Math.PI+")");
+    air_yaw.attr("transform","translate(75,375)rotate("+axis_canvas.rotation.z*180/Math.PI+")");
 }
 
 function draw(_state) {
@@ -79,8 +83,11 @@ function draw(_state) {
     renderer.render(scene, camera);
 
     //SVG ELEMENTS
+    air_roll.attr("transform","translate(75,75)rotate("+state.roll*180/Math.PI+")");
+    air_pitch.attr("transform","translate(75,225)rotate("+state.pitch*180/Math.PI+")");
+    air_yaw.attr("transform","translate(75,375)rotate("+state.yaw*180/Math.PI+")");
 }
 
 //startCanvas(animate);
 
-setInterval(getValue,10);
+//setInterval(getValue,10);
