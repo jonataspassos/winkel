@@ -1,0 +1,195 @@
+{% load static %}
+<html>
+
+<head>
+    <script src="{% static 'initial/js/d3.js' %}"></script>
+    <script src="{% static 'initial/js/three.js' %}"></script>
+    <script src="{% static 'initial/js/AxisCanvas.js' %}"></script>
+    <script src="{% static 'initial/js/WebGL.js' %}"></script>
+    <script src="{% static 'initial/js/WUtil.js' %}"></script>
+    <script>
+        function getValue() {
+            http_get("{% url 'initial:getvalue' %}", draw)
+        }
+    </script>
+    <link href="{% static 'initial/css/sistema.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Winkel Monitor</h1>
+
+    <div class="arrange-horizontally">
+        <div class="d4 bar" style="background-color: green">
+            <h4>Pitch - Y</h4>
+            <p id="pitch">0</p>
+        </div>
+        <div class="d4 bar" style="background-color: red">
+            <h4>Roll - X</h4>
+            <p id="roll">0</p>
+        </div>
+        <div class="d4 bar" style="background-color: blue">
+            <h4>Yaw - Z</h4>
+            <p id="yaw">0</p>
+        </div>
+    </div>
+    <div id="cont" class="arrange-horizontally">
+        <div id="svg">
+            <svg width="800" height="600">
+                <g id="orto-roll" transform="translate(75,75)">
+                    <g transform="translate(-75,-75)scale(0.3,0.3)" fill="red">
+                        <ellipse class = "back-circle" ry="200" rx="200" id="svg_3" cy="250" cx="250" />
+
+                        <ellipse ry="40" rx="40" id="svg_4" cy="240" cx="250" stroke-opacity="null"
+                            stroke-width="1.5" />
+                        <ellipse ry="7" rx="189" id="svg_5" cy="251.921875" cx="250" stroke-opacity="null"
+                            stroke-width="1.5" />
+                        <ellipse ry="4" rx="90" id="svg_9" cy="215" cx="250" stroke-opacity="null" stroke-width="1.5" />
+                        <ellipse ry="66" rx="4" id="svg_10" cy="210" cx="250" stroke-opacity="null"
+                            stroke-width="1.5" />
+                        <g id="svg_23">
+                            <ellipse ry="15" rx="15" id="svg_7" cy="265" cx="340" fill-opacity="null"
+                                stroke-opacity="null" stroke-width="1.5" />
+                            <ellipse ry="15" rx="15" id="svg_11" cy="265" cx="160" fill-opacity="null"
+                                stroke-opacity="null" stroke-width="1.5" />
+                        </g>
+                        <g id="svg_34">
+                            <g id="svg_28">
+                                <rect id="svg_24" height="33" width="3" y="254" x="300" fill-opacity="null"
+                                    stroke-opacity="null" stroke-width="1.5" />
+                                <rect id="svg_25" height="33" width="3" y="254" x="295" fill-opacity="null"
+                                    stroke-opacity="null" stroke-width="1.5" />
+                                <ellipse ry="7" rx="3.5" id="svg_26" cy="286" cx="307" fill-opacity="null"
+                                    stroke-opacity="null" stroke-width="1.5" />
+                                <ellipse ry="7" rx="3.5" id="svg_27" cy="286" cx="291" fill-opacity="null"
+                                    stroke-opacity="null" stroke-width="1.5" />
+                            </g>
+                            <g id="svg_33">
+                                <rect id="svg_29" height="33" width="3" y="254" x="202" fill-opacity="null"
+                                    stroke-opacity="null" stroke-width="1.5" />
+                                <rect id="svg_30" height="33" width="3" y="254" x="197" fill-opacity="null"
+                                    stroke-opacity="null" stroke-width="1.5" />
+                                <ellipse ry="7" rx="3.5" id="svg_31" cy="286" cx="209" fill-opacity="null"
+                                    stroke-opacity="null" stroke-width="1.5" />
+                                <ellipse ry="7" rx="3.5" id="svg_32" cy="286" cx="193" fill-opacity="null"
+                                    stroke-opacity="null" stroke-width="1.5" />
+                            </g>
+                        </g>
+                        <g id="svg_39">
+                            <ellipse ry="6" rx="3" id="svg_35" cy="287.260417" cx="256" fill-opacity="null"
+                                stroke-opacity="null" stroke-width="1.5" />
+                            <ellipse ry="6" rx="3" id="svg_36" cy="287.260417" cx="244" fill-opacity="null"
+                                stroke-opacity="null" stroke-width="1.5" />
+                            <rect id="svg_38" height="11" width="5" y="275.760417" x="247.5" fill-opacity="null"
+                                stroke-opacity="null" stroke-width="1.5" />
+                        </g>
+                        <ellipse ry="6.5" rx="27" id="svg_23" cy="225" cx="250" fill-opacity="null"
+                            stroke-opacity="null" stroke-width="1.5" fill="#fff" />
+                    </g>
+                </g>
+                <g id="orto-pitch" transform="translate(75,225)">
+                    <g transform="translate(-75,-75)scale(0.3,0.3)" fill="green">
+                        <ellipse class = "back-circle" ry="200" rx="200" id="svg_1" cy="250" cx="250"/>
+                        <rect id="svg_26" height="46.999998" width="246.999999" y="229.427083" x="108.50001"
+                            stroke-opacity="null" stroke-width="1.5" />
+                        <ellipse ry="26.499999" rx="45.000001" id="svg_27" cy="251.927081" cx="352.500001"
+                            stroke-opacity="null" stroke-width="1.5" />
+                        <rect transform="rotate(-27 120.49999999999994,248.42707824707034) " rx="7" id="svg_30"
+                            height="46" width="45.999999" y="225.427083" x="97.5" stroke-opacity="null"
+                            stroke-width="1.5" />
+                        <ellipse transform="rotate(18.31732940673828 229.64347839355432,239.12742614746097) " ry="7.5"
+                            rx="85.020698" id="svg_31" cy="239.127431" cx="229.643493" stroke-opacity="null"
+                            stroke-width="1.5" />
+                        <ellipse ry="21.5" rx="45" id="svg_32" cy="255.927083" cx="363.5" stroke-opacity="null"
+                            stroke-width="1.5" />
+                        <rect transform="rotate(-34.26109313964844 125.17897796630858,222.94287109375) " rx="72"
+                            id="svg_35" height="94.479072" width="39.536297" y="175.703314" x="105.410837"
+                            stroke-opacity="null" stroke-width="1.5" />
+                        <rect id="svg_36" height="20.999995" width="59.000003" y="264.427082" x="235.499997"
+                            stroke-opacity="null" stroke-width="1.5" />
+                        <ellipse ry="5" rx="32.499998" id="svg_37" cy="263.427083" cx="120.000002" stroke-opacity="null"
+                            stroke-width="1.5" />
+                        <g id="svg_40">
+                            <rect id="svg_38" height="18" width="4" y="270.927083" x="215.5" fill-opacity="null"
+                                stroke-opacity="null" stroke-width="1.5" />
+                            <ellipse ry="7" rx="7" id="svg_39" cy="294.927083" cx="217" fill-opacity="null"
+                                stroke-opacity="null" stroke-width="1.5" />
+                        </g>
+                        <g id="svg_43">
+                            <rect id="svg_41" height="18" width="4" y="270.927083" x="345.5" fill-opacity="null"
+                                stroke-opacity="null" stroke-width="1.5" />
+                            <ellipse ry="7" rx="7" id="svg_42" cy="294.927083" cx="347" fill-opacity="null"
+                                stroke-opacity="null" stroke-width="1.5" />
+                        </g>
+                        <ellipse ry="8" rx="16.5" id="svg_44" cy="238.427083" cx="374" fill-opacity="null"
+                            stroke-opacity="null" stroke-width="1.5" fill="#fff" />
+
+                    </g>
+                </g>
+                <g id="orto-yaw" transform="translate(75,375)">
+                    <g transform="translate(-75,-75)scale(0.3,0.3)" fill="blue">
+                        <ellipse class = "back-circle" ry="200" rx="200" id="svg_1" cy="250" cx="250"/>
+                        <rect rx="28" id="svg_2" height="256.999987" width="72" y="150" x="216" stroke-width="1.5" />
+                        <ellipse ry="67" rx="43.5" id="svg_3" cy="130" cx="252" stroke-width="1.5" />
+                        <ellipse ry="6.5" rx="27" id="svg_23" cy="86.927083" cx="252" fill-opacity="null"
+                            stroke-opacity="null" stroke-width="1.5" fill="#fff" />
+                        <g id="svg_24">
+                            <g id="svg_8">
+                                <ellipse transform="rotate(-30 214,393.4270935058594) " ry="17.5" rx="41.5" id="svg_5"
+                                    cy="393.427083" cx="214" fill-opacity="null" stroke-opacity="null"
+                                    stroke-width="1.5" />
+                                <ellipse transform="rotate(30 289.99999999999994,393.4270935058594) " ry="17.5"
+                                    rx="41.5" id="svg_7" cy="393.427083" cx="290" fill-opacity="null"
+                                    stroke-opacity="null" stroke-width="1.5" />
+                            </g>
+                            <rect rx="9" transform="rotate(45 251.99999999999997,403.92709350585943) " id="svg_4"
+                                height="43.180194" width="43.180194" y="382.336991" x="230.409887" stroke-opacity="null"
+                                stroke-width="1.5" />
+                        </g>
+                        <g stroke="null" id="svg_25">
+                            <g stroke="null" id="svg_20">
+                                <rect id="svg_17" height="83.108503" width="34" y="199.05762" x="312"
+                                    fill-opacity="null" stroke-opacity="null" stroke-width="1.5" />
+                                <rect id="svg_18" height="83.108503" width="34" y="199.05762" x="158"
+                                    fill-opacity="null" stroke-opacity="null" stroke-width="1.5" />
+                            </g>
+                            <g stroke="null" id="svg_21">
+                                <rect
+                                    transform="matrix(0.8746197071393957,0.6198738707316298,-0.48480962024633706,1.1182820650448053,164.9264227402398,-198.3877512494986) "
+                                    id="svg_15" height="24" width="104" y="248.40212" x="256.509232" fill-opacity="null"
+                                    stroke-opacity="null" stroke-width="1.5" />
+                                <rect
+                                    transform="matrix(0.8752288300831936,-0.6184667560386103,0.4837091016212164,1.1190608849797967,-101.56495011013112,113.56222361393158) "
+                                    id="svg_16" height="24" width="104" y="248.402128" x="143.509232"
+                                    fill-opacity="null" stroke-opacity="null" stroke-width="1.5" />
+                            </g>
+                            <g stroke="null" id="svg_22">
+                                <g stroke="null" id="svg_12">
+                                    <rect
+                                        transform="matrix(0.7071067811865476,-0.8916806000296187,0.7071067811865475,0.8916806000296189,-112.78814895724906,211.06475422671048) "
+                                        id="svg_10" height="39.221826" width="137.523336" y="218.389072" x="120.738337"
+                                        fill-opacity="null" stroke-opacity="null" stroke-width="1.5" />
+                                    <rect
+                                        transform="matrix(0.7071067811865476,0.8916806000296187,-0.7071067811865475,0.8916806000296189,260.6992352476358,-239.23394315247128) "
+                                        id="svg_11" height="39.221826" width="137.523336" y="218.389095" x="246.738337"
+                                        fill-opacity="null" stroke-opacity="null" stroke-width="1.5" />
+                                </g>
+                                <ellipse
+                                    transform="matrix(0.7071067811865476,-0.8916806000296187,0.7071067811865475,0.8916806000296189,-162.0294850304673,184.55177378881237) "
+                                    ry="19.74264" rx="28.571067" id="svg_13" cy="286.927083" cx="139.500008"
+                                    fill-opacity="null" stroke-opacity="null" stroke-width="1.5" />
+                                <ellipse
+                                    transform="matrix(0.7071067811865476,0.8916806000296187,-0.7071067811865475,0.8916806000296189,309.6476717816431,-264.8552622320817) "
+                                    ry="19.74264" rx="28.571067" id="svg_14" cy="286.927083" cx="364.500008"
+                                    fill-opacity="null" stroke-opacity="null" stroke-width="1.5" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <div id="canvas"></div>
+    </div>
+    <script src="{% static 'initial/js/index.js' %}"></script>
+</body>
+
+</html>
