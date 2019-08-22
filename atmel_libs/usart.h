@@ -117,7 +117,7 @@ void USART_TRANSFER_FLOAT(float val){
 		i--;
 	}while(temp  && (i>=2));
 	text[19] = 0;*/
-	sprintf(text,"%05.3f",val);
+	sprintf(text,"%09.3f",val);
 	USART_TRANSFER_STRING(text);//+i+1
 }
 #endif
