@@ -8,8 +8,8 @@
     <script src="{% static 'initial/js/WebGL.js' %}"></script>
     <script src="{% static 'initial/js/WUtil.js' %}"></script>
     <script>
-        function getValue() {
-            http_get("{% url 'initial:getvalue' %}", draw)
+        function getValue(recall) {
+            http_get("{% url 'initial:getvalue' %}", draw,recall)
         }
     </script>
     <link href="{% static 'initial/css/sistema.css' %}" rel="stylesheet">

@@ -4,21 +4,23 @@ function formatFloat(f, ncasas) {
     return Math.round(f * pow) / pow;
 }
 
-function http_get(url, funct) {
+function http_get(url, funct,recall) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url);
     xhr.onload = function () {
         if (xhr.status === 200) {
             funct(xhr.responseText);
+            if(recall)
+                http_get(url,funct,recall)
         }
         else {
-            alert('Request failed.  Returned status of ' + xhr.status);
+            //alert('Request failed.  Returned status of ' + xhr.status);
         }
     };
     xhr.send();
 }
 
-function startCanvas(animate) {
+function startCanvas() {
     if (WEBGL.isWebGLAvailable()) {
 
         // Initiate function or other initializations here
@@ -29,4 +31,8 @@ function startCanvas(animate) {
         document.getElementById('container').appendChild(warning);
 
     }
+}
+
+function startHttp(){
+    getValue(true);
 }

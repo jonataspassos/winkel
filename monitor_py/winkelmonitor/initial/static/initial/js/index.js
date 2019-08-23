@@ -86,8 +86,37 @@ function draw(_state) {
     air_roll.attr("transform","translate(75,75)rotate("+state.roll*180/Math.PI+")");
     air_pitch.attr("transform","translate(75,225)rotate("+state.pitch*180/Math.PI+")");
     air_yaw.attr("transform","translate(75,375)rotate("+state.yaw*180/Math.PI+")");
+
 }
+//startCanvas();
 
-//startCanvas(animate);
+startHttp();
 
-//setInterval(getValue,10);
+/**
+ * step = [
+        (state.pitch - axis_canvas.rotation.x) / 9,
+        (state.roll - axis_canvas.rotation.y) / 9,
+        (state.yaw - axis_canvas.rotation.z) / 9
+    ]
+
+    for (var i = 1; i <= 9; i++) {
+        setTimeout(function () {
+            //CANVAS ELEMENTS
+            axis_canvas.rotation.x += step[0];
+            axis_canvas.rotation.y += step[1];
+            axis_canvas.rotation.z += step[2];
+
+            //CABEÇALHO
+            d3.select("#pitch").text(axis_canvas.rotation.y);
+            d3.select("#roll").text(axis_canvas.rotation.x);
+            d3.select("#yaw").text(axis_canvas.rotation.z);
+
+            renderer.render(scene, camera);
+
+            //SVG ELEMENTS
+            air_roll.attr("transform", "translate(75,75)rotate(" + axis_canvas.rotation.x * 180 / Math.PI + ")");
+            air_pitch.attr("transform", "translate(75,225)rotate(" + axis_canvas.rotation.y * 180 / Math.PI + ")");
+            air_yaw.attr("transform", "translate(75,375)rotate(" + axis_canvas.rotation.z * 180 / Math.PI + ")");
+        }, i);
+    }
+ */
