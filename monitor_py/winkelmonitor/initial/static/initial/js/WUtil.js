@@ -11,7 +11,7 @@ function http_get(url, funct,recall) {
         if (xhr.status === 200) {
             funct(xhr.responseText);
             if(recall)
-                http_get(url,funct,recall)
+                setTimeout(function(){http_get(url,funct,recall)},90)
         }
         else {
             //alert('Request failed.  Returned status of ' + xhr.status);
