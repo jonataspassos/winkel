@@ -102,11 +102,17 @@ int main(void) {
 		// COLETA DE DADOS MAGNETÔMETRO ACELERÔMETRO GIROSCÓIPIO //
 		MPU6050_Read(&AccelX, &AccelY, &AccelZ, &Temperatura, &GyroX, &GyroY, &GyroZ);
 		HMC5883L_Read(&MagnetX,&MagnetY,&MagnetZ);
+		
 
-		// SENSIBILIDADES (OBTIDAS POR DATASHEETS) //
-		float acc_sensibilty = 16384/10;
+		
+		
+		
+		// CONDICIONAMENTO DE SINAIS //
+		
+		
+		float acc_sensibilty = 16384/9.81;
 		float gyro_sensibilty = 131;
-		float magnet_sensibility = 1370;
+		//float magnet_sensibility = 1370;
 		
 		float sAccelX = AccelX/acc_sensibilty;
 		float sAccelY = AccelY/acc_sensibilty;
@@ -116,9 +122,11 @@ int main(void) {
 		float sGyroY = GyroY/gyro_sensibilty;
 		float sGyroZ = GyroZ/gyro_sensibilty;
 		
-		float sMagnetX = MagnetX/magnet_sensibility;
-		float sMagnetY = MagnetY/magnet_sensibility;
-		float sMagnetZ = MagnetZ/magnet_sensibility;
+		float sMagnetX = (MagnetX+580500)/38500;
+		float sMagnetY = (MagnetY+112000)/42000;
+		float sMagnetZ = (MagnetZ+648000)/9000;
+		
+		
 		
 		// CALCULO DOS ÂNGULOS DE EULER // 
 		
@@ -138,13 +146,10 @@ int main(void) {
 		XP_12=valores_X.P2;
 		XP_21=valores_X.P3;
 		XP_22=valores_X.P4;
-
 		
-		
-		//*
 		USART_TRANSFER_STRING("2:");
 		USART_TRANSFER_FLOAT(KanguloX);
-		USART_TRANSFER_STRING(";");/**/
+		USART_TRANSFER_STRING(";");
 		
 		valores_Y = KalmanFilter(Yangle,sGyroY,offset_y,YP_11,YP_12,YP_21,YP_22);
 		KanguloY=valores_Y.K;
@@ -154,10 +159,9 @@ int main(void) {
 		YP_21=valores_Y.P3;
 		YP_22=valores_Y.P4;
 		
-		//*
 		USART_TRANSFER_STRING("1:");
 		USART_TRANSFER_FLOAT(KanguloY);
-		USART_TRANSFER_STRING(";");/**/
+		USART_TRANSFER_STRING(";");
 		
 		valores_Z = KalmanFilter(Zangle,sGyroZ,offset_z,ZP_11,ZP_12,ZP_21,ZP_22);
 		KanguloZ=valores_Z.K;
@@ -167,25 +171,13 @@ int main(void) {
 		ZP_21=valores_Z.P3;
 		ZP_22=valores_Z.P4;
 		
-		//*
 		USART_TRANSFER_STRING("3:");
 		USART_TRANSFER_FLOAT(KanguloZ);
-		USART_TRANSFER_STRING(";");/**/
+		USART_TRANSFER_STRING(";");
 		
 		_delay_ms(100);
+		/**/
 		
-		/*
-		USART_TRANSFER_STRING("2:");
-		USART_TRANSFER_FLOAT(sMagnetX*100);
-		USART_TRANSFER_STRING(";");
-		
-		USART_TRANSFER_STRING("1:");
-		USART_TRANSFER_FLOAT(sMagnetY*100);
-		USART_TRANSFER_STRING(";");
-		
-		USART_TRANSFER_STRING("3:");
-		USART_TRANSFER_FLOAT(sMagnetZ*100);
-		USART_TRANSFER_STRING(";");/**/
     }
 }
 
