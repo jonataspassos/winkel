@@ -745,34 +745,34 @@ END GROUP
  *(.fini0)
                 0x00002678                _etext = .
 
-.data           0x00800100       0x20 load address 0x00002678
+.data           0x00800100       0x28 load address 0x00002678
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800100       0x20 main.o
-                                 0x22 (size before relaxing)
+                0x00800100       0x27 main.o
  *(.gnu.linkonce.d*)
-                0x00800120                . = ALIGN (0x2)
-                0x00800120                _edata = .
-                0x00800120                PROVIDE (__data_end, .)
+                0x00800128                . = ALIGN (0x2)
+ *fill*         0x00800127        0x1 
+                0x00800128                _edata = .
+                0x00800128                PROVIDE (__data_end, .)
 
-.bss            0x00800120        0x0
+.bss            0x00800128        0x0
                 [!provide]                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  *(COMMON)
                 [!provide]                PROVIDE (__bss_end, .)
                 0x00002678                __data_load_start = LOADADDR (.data)
-                0x00002698                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000026a0                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800120        0x0
+.noinit         0x00800128        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800120                _end = .
+                0x00800128                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -849,34 +849,34 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1c4f
+.debug_info     0x00000000     0x1d61
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_info    0x000005f4     0x165b main.o
+ .debug_info    0x000005f4     0x176d main.o
 
 .debug_abbrev   0x00000000      0x924
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_abbrev  0x000005a2      0x382 main.o
 
-.debug_line     0x00000000      0xa11
+.debug_line     0x00000000      0xabb
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x133 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_line    0x00000133      0x8de main.o
+ .debug_line    0x00000133      0x988 main.o
 
 .debug_frame    0x00000000      0x328
  *(.debug_frame)
  .debug_frame   0x00000000      0x328 main.o
 
-.debug_str      0x00000000      0x6bd
+.debug_str      0x00000000      0x6c8
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x4b5 main.o
-                                0x549 (size before relaxing)
+ .debug_str     0x00000208      0x4c0 main.o
+                                0x554 (size before relaxing)
 
-.debug_loc      0x00000000     0x19eb
+.debug_loc      0x00000000     0x19d8
  *(.debug_loc)
- .debug_loc     0x00000000     0x19eb main.o
+ .debug_loc     0x00000000     0x19d8 main.o
 
 .debug_macinfo
  *(.debug_macinfo)

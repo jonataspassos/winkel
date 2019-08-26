@@ -123,16 +123,12 @@ int main(void) {
 		// CALCULO DOS ÂNGULOS DE EULER // 
 		
 		float Xangle = atan2(sAccelY,sAccelZ); //Roll??
-		float Yangle = atan2(-sAccelX,sqrt(square(sAccelY)+square(sAccelZ))); //Pitch??	
-		if (sAccelX < 0)
-			Yangle += M_PI;
+		float Yangle = atan2(-sAccelX,(sAccelZ<0?-1:1)*sqrt(square(sAccelY)+square(sAccelZ))); //Pitch??		
+			
 		float Zangle = atan2((sMagnetZ * sin(Xangle) - sMagnetY * cos(Xangle)),
 						(sMagnetX * cos(Yangle) + sMagnetY * sin(Yangle) * 
 						sin(Xangle) + sMagnetZ * sin(Yangle) * cos(Xangle))); // Yaw??
 		
-		Xangle += 2*M_PI;
-		Yangle += 2*M_PI;
-		Zangle += 2*M_PI;
 		
 		// CHAMADA DAS FUNÇÕES DO FILTRO DE KALMAN //
 		valores_X = KalmanFilter(Xangle,sGyroX,offset_x,XP_11,XP_12,XP_21,XP_22);
@@ -142,15 +138,13 @@ int main(void) {
 		XP_12=valores_X.P2;
 		XP_21=valores_X.P3;
 		XP_22=valores_X.P4;
-		
-		/*USART_TRANSFER_FLOAT(sAccelX);
-		USART_TRANSFER_STRING("\n");*/
+
 		
 		
-		/*USART_TRANSFER_STRING("2:");
+		//*
+		USART_TRANSFER_STRING("2:");
 		USART_TRANSFER_FLOAT(KanguloX);
-		USART_TRANSFER_STRING("\n");
-		_delay_ms(100);*/
+		USART_TRANSFER_STRING(";");/**/
 		
 		valores_Y = KalmanFilter(Yangle,sGyroY,offset_y,YP_11,YP_12,YP_21,YP_22);
 		KanguloY=valores_Y.K;
@@ -160,10 +154,10 @@ int main(void) {
 		YP_21=valores_Y.P3;
 		YP_22=valores_Y.P4;
 		
-		/*USART_TRANSFER_STRING("1:");
+		//*
+		USART_TRANSFER_STRING("1:");
 		USART_TRANSFER_FLOAT(KanguloY);
-		USART_TRANSFER_STRING("\n");
-		_delay_ms(100);*/
+		USART_TRANSFER_STRING(";");/**/
 		
 		valores_Z = KalmanFilter(Zangle,sGyroZ,offset_z,ZP_11,ZP_12,ZP_21,ZP_22);
 		KanguloZ=valores_Z.K;
@@ -173,23 +167,25 @@ int main(void) {
 		ZP_21=valores_Z.P3;
 		ZP_22=valores_Z.P4;
 		
-		/*USART_TRANSFER_STRING("3:");
+		//*
+		USART_TRANSFER_STRING("3:");
 		USART_TRANSFER_FLOAT(KanguloZ);
-		_delay_ms(100);
-		USART_TRANSFER_STRING("\r\n");*/
+		USART_TRANSFER_STRING(";");/**/
 		
-		// IMPRESSÃO DOS DADOS //
+		_delay_ms(100);
+		
+		/*
+		USART_TRANSFER_STRING("2:");
+		USART_TRANSFER_FLOAT(sMagnetX*100);
+		USART_TRANSFER_STRING(";");
 		
 		USART_TRANSFER_STRING("1:");
-		USART_TRANSFER_FLOAT(KanguloY);
-		USART_TRANSFER_STRING("\n");
-		USART_TRANSFER_STRING("\r\n");
+		USART_TRANSFER_FLOAT(sMagnetY*100);
+		USART_TRANSFER_STRING(";");
 		
-		
-		
-		
-		
-		
+		USART_TRANSFER_STRING("3:");
+		USART_TRANSFER_FLOAT(sMagnetZ*100);
+		USART_TRANSFER_STRING(";");/**/
     }
 }
 
